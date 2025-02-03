@@ -1,0 +1,24 @@
+services:
+  app:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app       
+    depends_on:
+      - faiss_db
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  faiss_db:
+    image: nvidia/cuda:11.2-base   
+    container_name: faiss_db
+    volumes:
+      - faiss_data:/app/faiss_index 
+    environment:
+      - FAISS_INDEX_PATH=/app/faiss_index
+
+volumes:
+  faiss_data:
+    driver: local
