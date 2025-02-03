@@ -1,23 +1,22 @@
 services:
   app:
     build: .
-    container_name: fastapi_app
+    container_name: python_app
     ports:
       - "8000:8000"
     volumes:
       - .:/app       
     depends_on:
-      - faiss_db
+      - geoutils_app
     environment:
       - PYTHONUNBUFFERED=1
 
-  faiss_db:
+  geoutils_app:
     image: nvidia/cuda:11.2-base   
-    container_name: faiss_db
+    container_name: geoutils_app
     volumes:
-      - faiss_data:/app/faiss_index 
-    environment:
-      - FAISS_INDEX_PATH=/app/faiss_index
+      - geoutils_data:/app/ 
+
 
 volumes:
   faiss_data:
