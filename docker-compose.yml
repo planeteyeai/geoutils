@@ -19,5 +19,5 @@ services:
 
 
 volumes:
-  faiss_data:
+  geoutils_data:
     driver: local
